@@ -13,6 +13,14 @@ module HealthGraph
         populate_from_hash! hash
       end      
     end
+    
+    def fitness_activity_summaries params = {}
+      summaries = []
+      self.items.each do |item|
+        summaries << HealthGraph::FitnessActivitySummary.new(self.access_token, item.url, params)
+      end
+      return summaries
+    end
                       
     def initialize(access_token, path, params = {})            
       self.access_token = access_token
